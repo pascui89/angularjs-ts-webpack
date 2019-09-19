@@ -8,6 +8,8 @@ import { HeroService } from './hero.service';
 import { HeroesComponent } from './heroes/heroes.component';
 import { MessageService } from './message.service';
 import { MessagesComponent } from './messages/messages.component';
+
+import 'bootstrap/dist/css/bootstrap.min.css';
 import './styles.css';
 
 @NgModule({
