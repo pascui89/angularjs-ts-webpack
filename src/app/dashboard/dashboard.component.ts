@@ -1,5 +1,5 @@
 import { Component, OnInit } from 'angular-ts-decorators';
-import { Hero } from '../hero';
+import { IHero } from '../hero';
 import { HeroService } from '../hero.service';
 
 @Component({
@@ -8,7 +8,7 @@ import { HeroService } from '../hero.service';
   styles: [ require('./dashboard.component.scss') ]
 })
 export class DashboardComponent implements OnInit {
-  heroes: Hero[] = [];
+  heroes: IHero[] = [];
 
   /*@ngInject*/
   constructor(private heroService: HeroService) { }

@@ -1,5 +1,5 @@
 import { Component, OnInit } from 'angular-ts-decorators';
-import { Hero } from '../hero';
+import { IHero } from '../hero';
 import { HeroService } from '../hero.service';
 
 @Component({
@@ -8,7 +8,7 @@ import { HeroService } from '../hero.service';
   styles: [require('./heroes.component.scss')]
 })
 export class HeroesComponent implements OnInit {
-  heroes: Hero[];
+  heroes: IHero[];
 
   /*@ngInject*/
   constructor(private heroService: HeroService) { }
@@ -28,7 +28,7 @@ export class HeroesComponent implements OnInit {
     this.heroService.addHero(name).then(() => this.getHeroes());
   }
 
-  delete(hero: Hero): void {
+  delete(hero: IHero): void {
     this.heroes = this.heroes.filter(h => h !== hero);
     this.heroService.deleteHero(hero).then();
   }

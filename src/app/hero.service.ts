@@ -1,11 +1,11 @@
 import { IHttpService, IPromise, IQService } from 'angular';
 import { Injectable } from 'angular-ts-decorators';
-import { Hero } from './hero';
+import { IHero } from './hero';
 import { MessageService } from './message.service';
 
 @Injectable('heroService')
 export class HeroService {
-  private heroes: Hero[] = [];
+  private heroes: IHero[] = [];
 
   private heroesUrl = 'heroes.json';  // URL to web api
 
@@ -15,12 +15,12 @@ export class HeroService {
               private messageService: MessageService) { }
 
   /** GET heroes from the server */
-  getHeroes(): IPromise<Hero[]> {
-    const deferred = this.$q.defer<Hero[]>();
+  getHeroes(): IPromise<IHero[]> {
+    const deferred = this.$q.defer<IHero[]>();
     if (this.heroes.length) {
       deferred.resolve(this.heroes);
     } else {
-      this.$http.get<Hero[]>(this.heroesUrl).then(response => {
+      this.$http.get<IHero[]>(this.heroesUrl).then(response => {
         this.log('fetched heroes');
         this.heroes = response.data;
         deferred.resolve(response.data);
@@ -33,8 +33,8 @@ export class HeroService {
   }
 
   /** GET hero by id */
-  getHero(id: number): IPromise<Hero> {
-    const deferred = this.$q.defer<Hero>();
+  getHero(id: number): IPromise<IHero> {
+    const deferred = this.$q.defer<IHero>();
     const hero = this.heroes.find(h => h.id === id);
     if (hero) {
       this.log(`fetched hero ${id}`);
@@ -48,8 +48,8 @@ export class HeroService {
   }
 
   /* GET heroes whose name contains search term */
-  searchHeroes(term: string): IPromise<Hero[]> {
-    const deferred = this.$q.defer<Hero[]>();
+  searchHeroes(term: string): IPromise<IHero[]> {
+    const deferred = this.$q.defer<IHero[]>();
     const error = `no heroes with name that contains ${term}`;
     if (!term.trim()) {
       // if not search term, return empty hero array.
@@ -65,8 +65,8 @@ export class HeroService {
   //////// Save methods //////////
 
   /** POST: add a new hero to the server */
-  addHero(name: string): IPromise<Hero> {
-    const deferred = this.$q.defer<Hero>();
+  addHero(name: string): IPromise<IHero> {
+    const deferred = this.$q.defer<IHero>();
     const hero = { name, id: this.getNewId() };
     this.heroes.push(hero);
     this.log('added new hero');
@@ -76,7 +76,7 @@ export class HeroService {
   }
 
   /** DELETE: delete the hero from the server */
-  deleteHero(hero: Hero | number): IPromise<boolean> {
+  deleteHero(hero: IHero | number): IPromise<boolean> {
     const deferred = this.$q.defer<boolean>();
     const id = typeof hero === 'number' ? hero : hero.id;
     const index = this.heroes.findIndex(h => h.id === id);
@@ -94,8 +94,8 @@ export class HeroService {
   }
 
   /** PUT: update the hero on the server */
-  updateHero(hero: Hero): IPromise<any> {
-    const deferred = this.$q.defer<Hero>();
+  updateHero(hero: IHero): IPromise<any> {
+    const deferred = this.$q.defer<IHero>();
     const index = this.heroes.findIndex(h => h.id === hero.id);
     if (index > -1) {
       this.heroes[index] = hero;

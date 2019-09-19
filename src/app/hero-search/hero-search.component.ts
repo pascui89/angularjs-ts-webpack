@@ -1,5 +1,5 @@
 import { Component, OnInit } from 'angular-ts-decorators';
-import { Hero } from '../hero';
+import { IHero } from '../hero';
 import { HeroService } from '../hero.service';
 
 @Component({
@@ -8,7 +8,7 @@ import { HeroService } from '../hero.service';
   styles: [ require('./hero-search.component.scss') ]
 })
 export class HeroSearchComponent {
-  heroes: Hero[];
+  heroes: IHero[];
 
   /*@ngInject*/
   constructor(private heroService: HeroService) {}

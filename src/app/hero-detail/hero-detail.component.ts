@@ -1,7 +1,6 @@
 import { StateService } from '@uirouter/angularjs';
-import { IHttpResponse } from 'angular';
 import { Component, Input, OnInit } from 'angular-ts-decorators';
-import { Hero } from '../hero';
+import { IHero } from '../hero';
 import { HeroService } from '../hero.service';
 
 @Component({
@@ -10,7 +9,7 @@ import { HeroService } from '../hero.service';
   styles: [ require('./hero-detail.component.scss') ]
 })
 export class HeroDetailComponent implements OnInit {
-  @Input() hero: Hero;
+  @Input() hero: IHero;
 
   /*@ngInject*/
   constructor(
